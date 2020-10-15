@@ -1,0 +1,44 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+#contenedor{
+	width: 1300px;
+	height: 750px;
+	background: #1565c0;
+	margin: 0.5em auto;
+	padding: 0.5em;
+	border-radius: 1em;  
+}
+
+#contenido{
+	width: 1250px;
+	height: 120px;
+	background: #5e35b1;
+	border-radius: 1em;
+	color: #FFFFFF;
+}
+
+#figura{
+  	padding: 10px;
+   	margin: 10px;
+	display: inline-block;
+}
+#datos{
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+}
+
+#boton{
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+}
+.miletra{ 
+text-align: center; 
+font-family: Comic Sans MS; 
+font-weight:bold; 
+font-size: 15px; 
+color: #FFB6C1; 
+}
