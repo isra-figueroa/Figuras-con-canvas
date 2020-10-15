@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title>Figuras</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="estilo.css">
+	
+	<link rel="stylesheet" href="estilo.css">
+</head>
+<body style="background-color:#b71c1c;">
+	<div id="contenedor" align=center><!Colocamos una division donde utilizaremos el canvas>
+		<canvas id="lienzo" width="1200" height="600" style="border:1px solid #000000; background-color: #ffffff "></canvas><!Colocamos el canvas con sus medidas>
+		<div id="contenido">
+			<div id="figura">
+				<label >Seleccione la figura a dibujar:</label>
+				<select id =s1 name="select" onchange="cambio()">
+				  <option value="Triangulo">Triangulo</option> 
+				  <option value="Cuadrado" selected>Cuadrado</option>
+				  <option value="Circulo">Circulo</option>
+				</select>		
+				<label >Seleccione el color:</label>
+				<input type="color" id="color" value="#b71c1c">
+			</div>
+			
+			<div id="datos">
+				<div id="cuadrado" style=" ">
+					<label >Ingrese el lado:</label>
+					<input type=text id=n1><br></input>
+				</div>
+				<div  id="triangulo" style="display: none;">
+					<label >Ingrese la base:</label>
+					<input type=text id=n2><br></input>
+					<br>
+					<label >Ingrese la altura:</label>
+					<input type=text id=n3 ><br></input>
+				</div>
+				<div id="circulo" style="display: none;">
+					<label>Ingrese el radio:</label>
+					<input type=text id=n4><br></input>		
+				</div>
+
+			</div>
+			<div id="boton">
+				<input class="btn btn-danger btn-lg" type="button" id="envio" onclick="Dibujar()" value="Dibujar">
+			</div>
+		</div>
+	</div>	
+</body>
+	<script>
+		var a1i=0;
+		function cambio(){
+	   		var combo = document.getElementById("s1");
+			var selected = combo.options[combo.selectedIndex].text;
+			if (selected=="Triangulo") {
+				document.getElementById('triangulo').style.display='';
+				document.getElementById('circulo').style.display='none';
+				document.getElementById('cuadrado').style.display='none';
+			}
+			if (selected=="Circulo") {
+				document.getElementById('triangulo').style.display='none';
+				document.getElementById('circulo').style.display='';
+				document.getElementById('cuadrado').style.display='none';
+			}
+			if (selected=="Cuadrado") {
+				document.getElementById('triangulo').style.display='none';
+				document.getElementById('circulo').style.display='none';
+				document.getElementById('cuadrado').style.display='';
+			}		
+		}
+		
+		function Dibujar(){
+            var c = document.getElementById("lienzo");
+			var ctx= c.getContext("2d");
+            ctx.clearRect(0, 0, 1200, 600);
+            d1 = document.getElementById("n1").value;
+            d2 = document.getElementById("n2").value;
+            var d3 = document.getElementById("n3").value;
+            d4 = document.getElementById("n4").value;
+            var combo = document.getElementById("s1");
+			var selected = combo.options[combo.selectedIndex].text;
+			var color = document.getElementById('color').value;
+            if (selected=="Cuadrado") {
+	            cuadrado(color, d1);
+	        }
+	        if(selected=="Circulo"){
+	           circulo(color, d4);
+	        }
+	        if(selected=="Triangulo"){
+	        	
+	            triangulo(color, d2, d3);
+	        }    
+        }
+        
+        function cuadrado(color,l1){
+        	var c= document.getElementById("lienzo");
+			var ctx= c.getContext("2d");
+			ctx.beginPath();
+			ctx.fillStyle = color;
+			ctx.fillRect(100,100,l1,l1);
+			ctx.fill();
+		    ctx.closePath();
+			ctx.stroke();
+		}
+
+		function triangulo(color, ba, al){
+			ali=100+parseInt(al);
+			bal1=600-(parseInt(ba)/2);
+			bal2=600+(parseInt(ba)/2);
+			var c= document.getElementById("lienzo");
+			var ctx= c.getContext("2d");
+			ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.moveTo(600,100);
+		    ctx.lineTo(bal1,ali);
+		    ctx.lineTo(bal2,ali);
+		    ctx.fill();
+		    ctx.closePath();
+		}
+		
+
+		function circulo(color, ra){
+        	var c = document.getElementById("lienzo");
+			var ctx = c.getContext("2d");
+			ctx.beginPath();
+		    ctx.fillStyle = color;
+		    ctx.arc(600,300,ra,0,2* Math.PI);
+		    ctx.fill();
+		    ctx.closePath();
+		}		
+	</script>
+
+</html>
